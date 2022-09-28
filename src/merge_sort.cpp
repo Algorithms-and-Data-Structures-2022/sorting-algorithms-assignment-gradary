@@ -10,7 +10,7 @@ namespace assignment {
     // буфер памяти для операции слияния (merge)
     std::vector<int> buf(arr.size());
 
-    // забыл что-то здесь вызвать ...
+    merge_sort(arr, 0, static_cast<int>(arr.size()) - 1, buf);
   }
 
   void MergeSort::merge_sort(std::vector<int>& arr, int start, int stop, std::vector<int>& buf) const {
@@ -21,10 +21,13 @@ namespace assignment {
     }
 
     // вычисляем индекс середины области
-    const int middle = middle_of(start, stop);
+    const int mid = middle_of(start, stop);
 
-    // рекурсивный вызов сортировки левой [start, middle] и правой [middle + 1, stop] подмассивов ...
-    // слияния двух подмассивов [start, middle] и [middle + 1, stop] ...
+    //. рекурсивный вызов сортировки левой [start, middle] и правой [middle + 1, stop] подмассивов ...
+    //    // слияния двух подмассивов [start, middle] и [middle + 1, stop] ..
+    merge_sort(arr, start, mid, buf);
+    merge_sort(arr, mid + 1, stop, buf);
+    merge(arr, start, mid, stop, buf);
   }
 
 }  // namespace assignment
